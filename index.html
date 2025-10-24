@@ -1,11 +1,19 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>My First Website</title>
-</head>
-<body>
-  <h1>Hello World! 👋</h1>
-  <p>This is my first website using GitHub Pages.</p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello from S3</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 4rem; }
+      .card { max-width: 720px; padding: 2rem; border: 1px solid #ddd; border-radius: 12px; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>✅ Deployed via GitHub Actions to Amazon S3</h1>
+      <p>If you see this, your pipeline works!</p>
+      <p>Last updated: <script>document.write(new Date().toISOString());</script></p>
+    </div>
+  </body>
 </html>
