@@ -1,19 +1,87 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hello from S3</title>
-    <style>
-      body { font-family: system-ui, sans-serif; margin: 4rem; }
-      .card { max-width: 720px; padding: 2rem; border: 1px solid #ddd; border-radius: 12px; }
-    </style>
-  </head>
-  <body>
-    <div class="card">
-      <h1>✅ Deployed via GitHub Actions to Amazon S3</h1>
-      <p>If you see this, your pipeline works!</p>
-      <p>Last updated: <script>document.write(new Date().toISOString());</script></p>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Larry • Static Site on S3</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b1020; --card:#11172b; --text:#e6e9f5; --muted:#9aa3ba; --brand:#7dd3fc; --brand2:#a78bfa; }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:radial-gradient(1200px 600px at 70% -10%, #14204a 0, transparent 60%), var(--bg); color:var(--text)}
+    .container{max-width:1100px; margin:0 auto; padding:24px}
+    header{display:flex; align-items:center; justify-content:space-between; padding:12px 0}
+    header .logo{font-weight:800; letter-spacing:.3px}
+    header nav a{color:var(--muted); text-decoration:none; margin-left:16px}
+    header nav a:hover{color:var(--text)}
+    .hero{display:grid; gap:24px; grid-template-columns:1.2fr .8fr; align-items:center; padding:56px 0}
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:rgba(125,211,252,.15); color:#cffafe; font-size:12px}
+    h1{font-size:44px; line-height:1.1; margin:10px 0 14px}
+    p.lead{color:var(--muted); font-size:18px; max-width:60ch}
+    .cta{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap}
+    .btn{padding:12px 20px; border-radius:12px; border:1px solid transparent; text-decoration:none; font-weight:600; transition:.2s}
+    .btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand2)); color:#0b1020}
+    .btn-secondary{border-color:#334155; color:var(--text)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02)); border:1px solid #1f2937; border-radius:16px; padding:20px}
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(3,1fr)}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; color:#cbd5e1; font-size:13px}
+    footer{color:var(--muted); padding:40px 0; text-align:center; border-top:1px solid #1f2937; margin-top:48px}
+    img.hero{width:100%; border-radius:16px; border:1px solid #1f2937; box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    @media (max-width:900px){ .hero{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">✨ Larry</div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#deploy">Deploy</a>
+        <a href="https://github.com/lladrayo/lladrayo.github.io">GitHub</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <span class="badge">✅ Deployed via GitHub Actions → Amazon S3</span>
+        <h1>Fast, simple static hosting on <span style="background:linear-gradient(90deg,var(--brand),var(--brand2)); -webkit-background-clip:text; background-clip:text; color:transparent;">S3</span></h1>
+        <p class="lead">This site auto-deploys whenever you push to <strong>main</strong>. Edit <span class="mono">index.html</span> in your repo to change the design.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#deploy">See how it deploys</a>
+          <a class="btn btn-secondary" href="index.html">Refresh site</a>
+        </div>
+      </div>
+      <div>
+        <img class="hero" alt="Preview" src="https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1200&auto=format&fit=crop" />
+      </div>
+    </section>
+
+    <section id="features" class="grid">
+      <div class="card">
+        <h3>☁️ S3 Website</h3>
+        <p class="lead">Static website hosting with public read through a bucket policy (no ACLs).</p>
+      </div>
+      <div class="card">
+        <h3>🛠️ CloudFormation</h3>
+        <p class="lead">Bucket + policy are provisioned as code, so infra is reproducible.</p>
+      </div>
+      <div class="card">
+        <h3>🤖 CI/CD</h3>
+        <p class="lead">GitHub Actions syncs files to the bucket on every push.</p>
+      </div>
+    </section>
+
+    <section id="deploy" class="card" style="margin-top:16px">
+      <h3>Deploy info</h3>
+      <p class="mono">
+        Last updated: <span id="ts"></span><br/>
+        Branch: main • Region: ap-southeast-2
+      </p>
+    </section>
+
+    <footer>© <script>document.write(new Date().getFullYear())</script> Larry — S3 Static Site</footer>
+  </div>
+  <script>document.getElementById('ts').textContent = new Date().toISOString();</script>
+</body>
 </html>
