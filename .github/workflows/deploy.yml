@@ -42,5 +42,6 @@ jobs:
       # --- 4) Deploy ---
       - name: Sync files to S3
         run: |
-          aws s3 sync website/ s3://<YOUR-BUCKET-NAME> --delete
-          echo "Deployed to: http://<YOUR-BUCKET-NAME>.s3-website-ap-southeast-1.amazonaws.com"
+          aws s3 sync website/ s3://my-portfolio-site-bucket --delete
+          echo "Deployed to: http://my-portfolio-site-bucket.s3-website-ap-southeast-1.amazonaws.com"
+
