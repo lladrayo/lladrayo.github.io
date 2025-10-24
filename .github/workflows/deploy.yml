@@ -14,7 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Safety check: verify secrets exist
       - name: Check secrets are available
         env:
           AKID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -29,18 +28,19 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-southeast-1   # change if you used another region
+          aws-region: ap-southeast-2   # Sydney (matches your CloudFormation region)
 
       - name: Who am I?
         run: aws sts get-caller-identity
 
       - name: Sync repo to S3
+        env:
+          BUCKET: staticsitestack-static-site   # your actual bucket name
         run: |
-          BUCKET="<YOUR-BUCKET-NAME>"   # <<< REPLACE with your bucket
           aws s3 sync . s3://$BUCKET --delete \
             --exclude ".git/*" \
             --exclude ".github/*" \
             --exclude "s3-static-site.yaml" \
             --exclude "template.yml" \
             --exclude "README.md"
-          echo "Deployed to: http://$BUCKET.s3-website-ap-southeast-1.amazonaws.com"
+          echo "Deployed to: http://$BUCKET.s3-website-ap-southeast-2.amazonaws.com"
